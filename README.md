@@ -1,4 +1,4 @@
-<h2># WooCommerce Exit INtent Lite<h2><br>
+<h2># WooCommerce Exit INtent Lite</h2><br>
 <hr>
 <p>Basic Exit INtent functionality for WooCommerce. <strong> **Requires Free Shipping Method enabled to grant free shipping**</strong></p>
 
