@@ -1,47 +1,358 @@
+.wceil-popup--activated #wrapper {
+    -webkit-filter: blur(1px);
+    filter: blur(1px);
+}
+
 #wceil-popup {
-    display: none;
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.7);
-    z-index: 9999;
-}
-
-.wceil-inner {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 400px;
-    width: 90%;
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
-#wceil-close {
-    position: absolute;
-    top: 10px; right: 15px;
-    cursor: pointer;
-    font-size: 20px;
-}
-
-#wceil-apply-discount {
-    padding: 10px 20px;
-    background: #0a74da;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-top: 10px;
-}
-
-#wceil-top-bar {
     width: 100%;
-    background-color: #f39c12;
-    color: white;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.5);
+    z-index: 99999999999;
+    display: none;
+}
+
+.wceil-wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%) scale(.95);
+    transform: translate(-50%,-50%) scale(.95);
+    width: 340px;
+    height: 430px;
+    border-radius: 15px;
+    background-image: url(https://cdn.convertcart.com/uploads/15c7e80b.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+    box-shadow: 0 5px 15px rgba(0,0,0,.35);
+}
+
+.wceil-close {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    top: -80px;
+    cursor: pointer;
+}
+
+.wceil-close img {
+    width: 15px;
+}
+
+.wceil-content {
+    position: relative;
     text-align: center;
-    padding: 10px;
-    font-weight: bold;
-    z-index: 9998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.wceil-logo {
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 130px;
+}
+
+.wceil-pageone {
+    position: relative;
+    top: 15px;
+}
+
+.wceil-title {
+    font-size: 32px;
+    color: #777;
+    font-weight: 400;
+}
+
+.wceil-offer--text,
+.wceil-text {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 26px;
+    color: #777;
+}
+
+.wceil-offer--text span,
+.wceil-text span {
+    background: #e62d2e;
+    color: #fff;
+    padding: 0 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.wceil-btn {
+    background: #e62d2e;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 1px;
+    padding: 4px 0 2px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 260px;
+    margin: 10px auto 0;
+    letter-spacing: .03em;
+    line-height: 2.4em;
+    text-align: center;
+    border: none;
+}
+
+.wceil-nothank {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    color: #ababab;
+    text-transform: uppercase;
+    padding-top: 15px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.wceil-pagetwo {
+    display: none;
+}
+
+.wceil-pagetwo .wceil-title {
+    font-size: 28px;
+    font-weight: 700;
+    padding-top: 18px;
+    color: #4e4e4e;
+}
+
+.wceil-pagetwo .wceil-offer--text {
+    font-size: 16px;
+}
+
+.wceil-pagetwo .wceil-offer--text span {
+    background: none;
+    color: #e62d2e;
+}
+
+.wceil-pagetwo .wceil-clock {
+    margin: 10px auto;
+}
+
+.wceil-pagetwo .wceil-text {
+    font-size: 14px;
+}
+
+.wceil-clock {
+    width: 200px;
+    text-align: center;
+    height: 90px;
+    margin: 20px auto;
+    background: #fab400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+    border-radius: 5px;
+    position: relative;
+    box-shadow: inset 1.95px 1.95px 2.6px rgb(0 0 0/16%);
+}
+
+.wceil-timercolon {
+    position: absolute;
+    width: 6px;
+    top: 31px;
+}
+
+.min-clock,
+.sec-clock {
+    position: relative;
+    height: 103px;
+}
+
+.mm-clock,
+.ss-clock {
+    margin: 0;
+    padding: 0;
+    width: 92px;
+    height: 63px;
+}
+
+.mm-clock li,
+.ss-clock li {
+    list-style-type: none;
+    display: inline-block;
+    color: #000;
+    width: 40px;
+    height: 63px;
+    font-size: 50px;
+    position: relative;
+    margin: 0;
+}
+
+.wceil-timer--divider {
+    position: absolute;
+    left: 0;
+    top: 54px;
+}
+
+.wceil-timer--bg {
+    position: absolute;
+    left: 0;
+    top: 25px;
+}
+
+.mm-clock li span,
+.ss-clock li span {
+    position: absolute;
+    z-index: 9;
+    top: 25%;
+    color: #fff;
+    letter-spacing: 26px;
+    left: 10px;
+    font-weight: 600;
+    font-family: 'DIN Condensed';
+}
+
+.sec-clock {
+    padding-left: 5px;
+}
+
+.clock-text {
+    float: left;
+    width: 100%;
+    margin-top: 0;
+    position: relative;
+    top: 15px;
+}
+
+.clock-text span {
+    text-transform: uppercase;
+    font-size: 9px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.wceil-coupon-section .wceil-coupon-wrap {
+    width: 150px;
+    margin: 10px auto 5px;
+    padding: 5px;
+    border: 1px solid #000;
+    box-shadow: 2.4px 2.4px 2px rgb(0 0 0/80%);
+    background: #fff;
+    cursor: pointer;
+}
+
+.wceil-coupon-section .wceil-coupon-wrap .wceil-coupon-code {
+    border: 2px dashed #777;
+    border-radius: 3px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #000;
+    letter-spacing: 4px;
+    line-height: normal;
+    padding: 2px 0 1px;
+}
+
+.wceil-coupon-section .wceil-copy {
+    font-size: 9px;
+    font-weight: 400;
+    text-decoration: underline;
+    cursor: pointer;
+    color: #777;
+}
+
+/* Sticky Toolbar */
+.wceil-sticky-toolbar {
+    height: 50px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-image: url(https://cdn.convertcart.com/uploads/09cfc1e1.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 60%;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    padding: 7px 0;
+    z-index: 9999;
+    box-sizing: border-box;
+    display: none;
+}
+
+.wceil-st-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-transform: scale(.95);
+    transform: scale(.95);
+}
+
+.wceil-st-sub-text1 {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 12px;
+    font-weight: 500;
+    margin-left: 0;
+    color: #777;
+    letter-spacing: normal;
+    width: 210px;
+    line-height: 17px;
+    text-align: left;
+}
+
+.wceil-st-sub-text1 .wceil-min-count,
+.wceil-st-sub-text1 .wceil-sec-count,
+.wceil-st-sub-text1 span {
+    color: #e62d2e;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.wceil-st-sub-text1 .wceil-min-count-block,
+.wceil-st-sub-text1 .wceil-sec-count-block {
+    display: inline-block;
+    width: 22px;
+}
+
+.wceil-st-coupon-code {
+    background: #f2b319;
+    color: #000;
+    font-size: 13px;
+    font-weight: 900;
+    width: 100px;
+    letter-spacing: 3px;
+    outline: 3px solid #f2b319;
+    padding: 6px 2px 6px 5px;
+    line-height: 1;
+    margin: 0 10px;
+    border: 1.5px dashed #000;
+    cursor: pointer;
+}
+
+.wceil-copy-text {
+    color: #777;
+    font-size: 9px;
+    text-decoration: underline;
+    cursor: pointer;
+    letter-spacing: normal;
+    text-align: left;
+    font-weight: 400;
+}
+
+.wceil-st-close {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 5px;
+    cursor: pointer;
+}
+
+.wceil-st-close img {
+    width: 8px;
 }
