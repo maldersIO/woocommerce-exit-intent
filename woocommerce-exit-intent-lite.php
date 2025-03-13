@@ -43,11 +43,12 @@ add_action('wp_enqueue_scripts', 'wceil_enqueue_scripts');
 function wceil_enqueue_scripts() {
     if (!is_cart() && !is_checkout()) return;
 
-    wp_enqueue_script('wceil-script', plugins_url('includes/js/wceil-script.js', __FILE__), ['jquery'], '1.0', true);
+    wp_enqueue_script('wceil-script', plugins_url('/includes/js/wceil-script.js', __FILE__), ['jquery'], '1.0', true);
     wp_localize_script('wceil-script', 'wceilData', [
         'couponCode' => 'wceil-20-off',
         'checkoutUrl' => wc_get_checkout_url()
     ]);
+	wp_localize_script('wceil-script', 'wc_cart_params', ['ajax_url' => admin_url('admin-ajax.php')]);
 
     wp_enqueue_style('wceil-style', plugins_url('wceil-style.css', __FILE__));
 }
@@ -59,7 +60,44 @@ function wceil_get_timer() {
     echo json_encode(['time' => 60]);
     wp_die();
 }
+// AJAX handler to apply coupon
+add_action('wp_ajax_wceil_apply_coupon', 'wceil_apply_coupon');
+add_action('wp_ajax_nopriv_wceil_apply_coupon', 'wceil_apply_coupon');
+function wceil_apply_coupon() {
+    if (!empty($_POST['coupon_code'])) {
+        $coupon_code = sanitize_text_field($_POST['coupon_code']);
+        WC()->cart->remove_coupons();
+        $applied = WC()->cart->apply_coupon($coupon_code);
+        
+        if ($applied) {
+            WC()->cart->calculate_totals();
+            wp_send_json_success('Coupon applied successfully.');
+        } else {
+            wp_send_json_error('Failed to apply coupon.');
+        }
+    } else {
+        wp_send_json_error('No coupon provided.');
+    }
+}
+register_deactivation_hook(__FILE__, 'wceil_delete_coupon_on_deactivation');
 
+function wceil_delete_coupon_on_deactivation() {
+    $coupon_code = 'wceil-20-off';
+
+    $coupon = new WP_Query([
+        'post_type'      => 'shop_coupon',
+        'post_status'    => 'publish',
+        'title'          => $coupon_code,
+        'posts_per_page' => 1,
+        'fields'         => 'ids',
+    ]);
+
+    if ($coupon->have_posts()) {
+        wp_delete_post($coupon->posts[0], true);
+    }
+
+    wp_reset_postdata();
+}
 //______________________________________________________________________________
 // All About Updates
 
